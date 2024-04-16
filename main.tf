@@ -1,20 +1,19 @@
 provider "aws" {
-	region = "us-east-1"
+   region = "ap-south-1"
 }
-
 terraform {
-	backend "s3" {
-		bucket = "my-tf-test-bucket-cis"
-		key = "terraform.tfstate"
-		region = "us-east-1"
-	}
+   backend "s3"{
+      bucket = "my-tf-new-bkt"
+      key = "terraform.tfstate"
+      region = "ap-south-1"
+   }  
+}
+       
+resource "aws_instance" "insta1"{
+   ami = "ami-007020fd9c84e18c7"
+   instance_type = "t2.micro"
+   tags = {
+      Name = "insta1"
+   }
 }
 
-resource "aws_instance" "inst1" {
-	ami = "ami-0cd59ecaf368e5ccf"
-	instance_type = "t2.micro"
-	tags = {
-		Name = "new_inst"
-		Env = "dev-env"
-	}
-}
